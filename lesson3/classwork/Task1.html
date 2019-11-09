@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Taks 1</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap" id="wrap">
+        <h1>Добавление списка элементов по условию</h1>
+
+        <header>
+          <input type="text" placeholder="" id="Receiver"/>
+          <input type="submit" value="Add" id="AddToList"/>
+        </header>
+
+        <div>
+          <div id="error">
+
+          </div>
+          <ul id="list">
+
+          </ul>
+        </div>
+
+    </div>
+    <script>
+      /*
+        Задание:
+
+          Написать скрипт, который будет добавлять введеный в инпут Receiver текст
+          в список list.
+          Если в списке больше 5 записей, убирать Event с кнопки AddToList.
+          Кнопке AddToList добавить disabled = true
+
+          После каждого ввода очищать значение инпута
+
+          Используемые методы:
+
+          addEventListener
+          removeEventListener
+
+          document.getElementById
+          document.createElement
+
+          element.innerText
+          element.setAttribute
+          element.appendChild
+
+          Получить значение инпута: Receiver.value [Receiver - это id]
+
+      */
+
+      var ListCount = 0;
+      var list = document.getElementById("list");
+      var btnAdd = document.getElementById("AddToList");
+      var txtReceiver = document.getElementById("Receiver");
+          txtReceiver.setAttribute("placeholder","введите текст ...");
+          txtReceiver.setAttribute("autofocus","");
+	  
+      function statusBtnAdd(){
+        if(ListCount>4)
+          {
+            btnAdd.setAttribute("disabled", "true");
+            txtReceiver.setAttribute("disabled", "true");
+            txtReceiver.removeAttribute("placeholder");
+          } else 
+          {
+            btnAdd.removeAttribute("disabled");
+            txtReceiver.removeAttribute("disabled");
+            txtReceiver.setAttribute("placeholder","введите текст ...");
+          }
+        txtReceiver.value="";
+        txtReceiver.focus();
+      }
+	  
+      function btnDel(id){
+        id.target.parentNode.remove();
+        ListCount--;
+        statusBtnAdd();
+      };
+	  
+      function btnAddClick(){
+        if(ListCount<5){
+          var str=txtReceiver.value.trim();
+          if(str.length>0)
+              {
+              var li = document.createElement("li");   
+              li.innerHTML = "<button>"+"-"+"</button>  "+txtReceiver.value;  
+              li.setAttribute("style", "list-style: none;");
+              list.appendChild(li);  
+              li.querySelector("button").addEventListener("click",btnDel);
+              ListCount++;
+              }              
+        };
+        statusBtnAdd();
+      }
+      btnAdd.addEventListener("click",btnAddClick);
+    </script>
+  </body>
+
+
+</html>

@@ -134,7 +134,7 @@
 		console.log(elt.classList);	
 	   }		
 //-----------------------------------------------------------
-    var indexClick = 0;
+    var indexClick = -1;
     mouseLight.onclick = function(e){
 	indexClick++;
 	console.log(indexClick);
@@ -148,7 +148,7 @@
      break;	
     case 3:ligthResult.style.backgroundColor="green";
 	       indexClick =-1;
-     break;
+     break;	 
 	}
     }
 //------------------------------------------------------------
@@ -156,16 +156,15 @@
     var nmClass = '';
 	var blockResult = document.getElementById('keyboardResult');
 	var masNumber = ['zero','one','two','three','four','five','six','seven','eight','nine'];
-    keyboardButton.onkeydown = function(){
-	counter++;
-    nmClass=counter.toString();
-	console.log(counter);
-    blockResult.classList.clear;
-	blockResult.className="resultBlock key-colors";	
+   
+   keyboardButton.onkeydown = function(){
+    	counter++;
+        nmClass=counter.toString();
+        blockResult.classList.clear;
+     	blockResult.className="resultBlock key-colors";	
 	for (var i=0; i<=nmClass.length-1; i++) {
-	blockResult.classList.add(masNumber[nmClass[i]]);
-	}
-	console.log(blockResult.classList);
+	   blockResult.classList.add(masNumber[nmClass[i]]);
+	   }
     }
   </script>
 </body>
