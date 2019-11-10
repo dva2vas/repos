@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+
+      1. Сгенерировать список стран в Select countries
+      2. При выборе страны генерировать еще один Select со списком
+        городов этой страны и вывести этот селект в блок result
+      3. При выборе города нужно случайно рандомить температуру от
+      -10 градусов до +40. Если температура
+
+        -10 до 0 то 'Солнечно' 'Легкий снегопад' 'Сильный снегопад'
+        0 до 30 то  'Солнечно' 'Дождь' 'Ветер' 'Сильный дождь'
+        30 до 40 то 'Солнечно' 'Засуха' 'Ветер'
+
+      4. Вывести сообщение на страничку
+        {Country}. В {City} {Weather} {Temperature} градусов.
+        Ukraine. В Kyiv Солнечно -10 градусов
+
+        + бонус добавить красивые картинки с погодой
+    */
+	/*
+    window.addEventListener("load", function () {
+      var countries = ['Ukraine', 'Poland', 'USA'];
+      var ukraineCity = ['Kyiv', 'Lviv', 'Odesa', 'Charkiv'];
+      var polandCity = ['Warszawa', 'Poznan', 'Krakow', 'Katowice'];
+      var usaCity = ['New York', 'Los Angeles', 'Las Vegas', 'Chicago'];
+    });
+	*/
+    window.addEventListener("load", function () {
+
+      var countries = ['Ukraine', 'Poland', 'USA'];
+      var ukraineCity = ['Kyiv', 'Lviv', 'Odesa', 'Charkiv'];
+      var polandCity = ['Warszawa', 'Poznan', 'Krakow', 'Katowice'];
+      var usaCity = ['New York', 'Los Angeles', 'Las Vegas', 'Chicago'];
+      var selCountry = document.getElementById('countries');
+      var res = document.getElementById("result");
+      var idxCountry = 0;
+//--------------------------------------------
+      getRandomIntInclusive = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
+//---------------------------------------------
+      addOptionAll = (selValue,masCity,str) => {
+        selValue.appendChild(new Option(str,0, true, true));
+        masCity.forEach((item,key) => {
+          var optionSel; optionSel = new Option(item, key+1);
+              selValue.appendChild(optionSel);
+        });
+      }
+
+      fmMessageCreate = event => {
+        var masWetherText = "";
+        var id = event.target.value;
+        var message = document.getElementById("selMessage");
+        if(message) message.remove(); 
+        if(id>0){
+          checkWether = checkCity => {
+            var masWether = [
+                          ['солнечно','легкий снегопад','сильный снегопад'],
+                          ['солнечно','дождь','ветер','сильный дождь'],
+                          ['солнечно','засуха','ветер']
+                          ];
+            var gradus = getRandomIntInclusive(-10,40);
+            if(gradus<0)masWetherText = masWether[0][getRandomIntInclusive(0,masWether[0].length-1)];
+              else
+            if(gradus>30)masWetherText = masWether[2][getRandomIntInclusive(0,masWether[2].length-1)];
+              else 
+              masWetherText = masWether[1][getRandomIntInclusive(0,masWether[1].length-1)];
+            var str = countries[idxCountry-1]+". В "+checkCity+" "+masWetherText+" "+gradus+" градусов";
+            return str;
+          };
+          var elMessage = document.createElement("p");
+          elMessage.id = "selMessage";
+          elMessage.innerText = checkWether(document.querySelector("#selCity option[value='"+id+"']").innerText);
+          res.appendChild(elMessage);
+        }
+      };
+
+      selCity = event => {
+        idxCountry = event.target.value;
+        var selCity = document.getElementById("selCity");
+        var message = document.getElementById("selMessage");
+        var masCity = [];
+        if(selCity) selCity.remove(); 
+        if(message) message.remove(); 
+        if(idxCountry>0){
+          switch(idxCountry){
+            case '1' : masCity = ukraineCity;
+			           break;
+            case '2' : masCity = polandCity;
+			           break;
+            case '3' : masCity = usaCity;
+			           break;
+          };
+          selCity = document.createElement("select"); 
+          selCity.style.marginTop = "10px";
+          selCity.id = "selCity";
+          addOptionAll(selCity,masCity,"Выберете город");
+          res.appendChild(selCity);
+          selCity.addEventListener("change",fmMessageCreate); 
+        };
+      };
+
+      selCountry.addEventListener("change",selCity);  
+
+      addOptionAll(selCountry,countries,"Выберете страну");
+    });	
+  </script>
+</head>
+<body>
+  <select id="countries"></select>
+  <div id="result"></div>
+  
+</body>
+</html>

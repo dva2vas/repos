@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Form work1</title>
+  <script>
+    /*
+      Задание:
+        Создать список дел, в который можно:
+        - Добавить новый элемент
+        - Удалить элемент
+        - Задать что пункт выполнен
+
+      Шаблон элемента:
+        <li class="listItem">
+            <input type="checkbox" class="DoneCheckbox" />
+            <span class="TodoText">{add text}</span>
+            <button>Remove</button>
+        </li>
+
+    */
+    window.addEventListener("load", function () {
+      //viables
+      var insText = document.getElementById("newToDo");
+	      insText.value = "";
+      var btnAdd = document.getElementById("AddToDo");
+      var listWork = document.getElementById("toDoList");
+
+          insText.setAttribute("placeholder","введите текст");
+          insText.setAttribute("style", "border-top-left-radius: 10px;border-bottom-left-radius: 10px;");
+          btnAdd.setAttribute("style", "border-top-right-radius: 10px;border-bottom-right-radius: 10px;");
+          insText.focus();
+
+      fnChecked = event => {
+        if(event.target.checked)
+          event.target.parentNode.querySelector("span").style.textDecoration = "line-through";
+        else
+          event.target.parentNode.querySelector("span").style.textDecoration = "none";
+      };
+
+      tbBtnRemove = event => event.target.parentNode.remove(); 
+ 
+      fnBtnAdd = () => {
+        var strText=insText.value.trim();
+        if(strText.length>0){
+          var li,input;
+
+          li = document.createElement("li");  
+          li.setAttribute("style", "list-style: none;");
+          li.className="listItem";
+
+          input = document.createElement("input"); 
+          input.setAttribute("type","checkbox");
+          input.className = "DoneCheckbox";
+          input.addEventListener("click",fnChecked);  
+             li.appendChild(input);
+			 
+          input = document.createElement("span"); 
+          input.innerText = strText; 
+          input.className = "TodoText";
+             li.appendChild(input);
+			 
+          input = document.createElement("button"); 
+          input.innerText = "Remove"; 
+          input.addEventListener("click",tbBtnRemove);  
+             li.appendChild(input);
+			 
+          listWork.appendChild(li);  
+        };
+      insText.value = "";
+      insText.focus();
+      };
+      //
+      fnTextENTER = vEvent => {if(vEvent.code=="Enter")fnBtnAdd()};
+      //event
+      btnAdd.addEventListener("click",fnBtnAdd);  
+      insText.addEventListener("keypress",fnTextENTER);
+    });
+  </script>
+</head>
+<body>
+    <header>
+      <input id="newToDo" class="textInput"/>
+      <input id="AddToDo" class="addButton" type="button" value="Add"/>
+    </header>
+    <ul id="toDoList">
+
+        <li class="listItem">
+            <input type="checkbox" class="DoneCheckbox" />
+            <span class="TodoText">{add text}</span>
+            <button>Remove</button>
+        </li>
+    </ul>
+  <style>
+    .done{
+      text-decoration: line-through;
+    }
+    .textInput{
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .addButton{
+      box-sizing: border-box;
+      padding: 10px 20px;
+      background: #ffcc00;
+    }
+
+    .DoneCheckbox,
+    .TodoText{
+      margin-right: 5px;
+    }
+
+    button{
+      background: red;
+      color: #fff;
+      padding: 5px 10px;
+    }
+  </style>
+</body>
+</html>
