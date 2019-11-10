@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Validate</title>
+</head>
+<script src="Task1.js"></script>
+<body>
+    <form id="formValid">
+        <label for="txtUser"> Имя пользователя:		</label>
+        <input required maxlength="10" minlength="2" type="text" id="txtUser"/> 
+
+        <label for="txtMail"> Email:		</label>
+        <input required  minlength="3"  type="email" id="txtMail"/>
+
+        <label for="txtPass"> Пароль:		</label>
+        <input required maxlength="16" minlength="8"  type="password"  id="txtPass"/> 
+
+        <label for="txtCount"> Количество сьеденых яблок:		</label>
+        <input required maxlength="16" minlength="1"  type="number" id="txtCount"/>
+
+        <label for="txtThank"> Напиши спасибо за яблоки:		</label>
+        <input required minlength="2" type="text" id="txtThank"/>
+
+        <label for="chBox"> Согласен на обучение:		</label>
+        <input required  type="checkbox"  id="chBox"/> 
+		
+        <input type="submit" value="Отправить"><input type="button" value="Валидировать" id="btnValidate">
+    </form>
+    <style>
+        input{
+          margin-top : 5px;
+          margin-left : 5px;
+        }
+        label{
+          display: block;
+          width: 300px;
+          margin-top : 10px;
+        }
+        input:valid {
+          border-color: green;
+        }
+        input:invalid {
+          border-color: red;
+        }
+      </style>
+</body>
+</html>
