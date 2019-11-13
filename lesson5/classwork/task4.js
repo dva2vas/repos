@@ -46,13 +46,13 @@ cryptWord = (countChar,inText) => {
   return rezStr;
 };
 
-	cryptWordBind = cryptWord.bind(null, 7);
-	decryptWordBind = decryptWord.bind(null, 7);
+	cryptWordBind = cryptWord.bind(null, 5);
+	decryptWordBind = decryptWord.bind(null, 5);
 
 	console.log('Входящий текст : '+inWord);
-	resWord = cryptWord(12,inWord);
+	resWord = cryptWord(2,inWord);
 	  console.log('Зашифрованый текст: '+resWord);
-	resWord = decryptWord(12,resWord);
+	resWord = decryptWord(2,resWord);
       console.log('Расшифрованный текст : '+resWord);
 
     resWord = cryptWordBind(inWord);
