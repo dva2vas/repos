@@ -23,7 +23,7 @@
       /* ... делать что-то с obj[key] ...
     // }
 */
-window.addEventListener('load', function () {
+window.addEventListener('DOMContentLoaded', function () {
   function Dog (name,breed) {
     this.name = name;
     this.breed = breed;

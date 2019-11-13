@@ -16,7 +16,7 @@
     обьект с настройками передаем через .apply();
 
 */
-window.addEventListener("load", function () {
+window.addEventListener('DOMContentLoaded', function () {
  const colors = {
     background: 'purple',
     color: 'white'
@@ -25,16 +25,16 @@ window.addEventListener("load", function () {
   function myCall( color ){
 	 let div;
 	     div = document.createElement("div");
-         div.innerHTML="<h1>"+"I know how binding works in JS"+"</h1>";
-         document.querySelector("body").appendChild(div);
+         div.innerHTML='<h1>'+'I know how binding works in JS'+'</h1>';
+         document.querySelector('body').appendChild(div);
 		 
          document.body.style.background = this.background;
          document.body.style.color = color;	 
    }
    
    function myBind (){
-    this.background = "blue";
-    this.color = "white";
+    this.background = 'blue';
+    this.color = 'white';
 
     document.body.style.background = this.background;
     document.body.style.color = this.color;
@@ -45,7 +45,7 @@ window.addEventListener("load", function () {
     document.title = this.title;
    };
 
-   myCall.call(colors,"green");
-   myApply.apply( colors, ["NEW TITLE"] );
+   myCall.call(colors,'green');
+   myApply.apply( colors, ['NEW TITLE'] );
   setTimeout(() =>  { myBind.bind( colors )() }, 1000);
 });
