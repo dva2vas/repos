@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+
+    <script>
+
+
+    /*
+      Задание:
+      1. При помощи методов изложеных ниже, переформатировать ITEA_COURSES в массив который 
+      содержит длину строк каждого из элементов.
+      2. Отфильтровать массив ITEA_COURSES по алфавиту.
+          + Бонусный бал. Вывести на страничку списком
+      3. Реализация функции поиска по массиву ITEA_COURSES.
+          + Бонусный бал. Вывести на страничку инпут и кнопку по которой будет срабатывать поиск.
+    */
+    window.addEventListener("load",() => {
+    const ITEA_COURSES = ["Курс HTML & CSS", "JavaScript базовый курс", "JavaScript продвинутый курс", "JavaScript Professional", "Angular 2.4 (базовый)", "Angular 2.4 (продвинутый)", "React.js", "React Native", "Node.js", "Vue.js"];
+    
+    let btnFind = document.getElementById("btnFind");
+    let inputText = document.getElementById("idFind");
+
+    viewArray = (arr,docEl,txt) => {
+      let listArr=document.getElementById(docEl);
+          listArr.innerText = txt;
+      let listVisArr = document.createElement('ul'); 
+          arr.map((nm,key) => {
+          let li = document.createElement('li'); 
+          if (typeof(nm) == "object")
+             {li.innerHTML= nm.name+"' (тривалість: "+nm.duration+" хв.)"+" акторський склад: "+nm.starring.join();}
+          else
+             {li.innerHTML = nm +" ("+nm.length+")";}
+              listVisArr.appendChild(li);          
+        });
+        listArr.appendChild(listVisArr);
+      }
+//--------------------------------------------------------------------- 
+  viewArray(ITEA_COURSES,'listArray1','Оригінальний масив з довжиною елементів');  
+  viewArray(ITEA_COURSES.sort(),'listArray2','Масив після сортування'); 
+  viewArray(ITEA_COURSES,'idFindArray','Результат пошуку'); 
+//-----------------------------------------------------------------------
+
+const findArray = (strFilter,mas) => {
+        return mas.filter(data => {
+          return data.toLowerCase().indexOf(strFilter.toLowerCase()) > -1;
+        });
+      };
+
+     let btnFindClick = () => {
+        if(inputText.value.trim())
+          viewArray(findArray(inputText.value,ITEA_COURSES),'idFindArray','Результат пошуку');
+          else
+          viewArray(ITEA_COURSES,'idFindArray','Результат пошуку');
+          inputText.focus();
+      };    
+      btnFind.addEventListener("click",btnFindClick);     
+/*
+      Задание 2:
+      Написать фильтр массива по:
+      Актеру, продолжительности
+
+      Бонус:
+        Сделать графическую оболочку для программы:
+        - Селект со списком актеров
+        - Селект или инпут с продолжительностью
+        - Результат в виде списка фильмов
+    */
+      listStars = document.getElementById("listArrayStars");
+      listDuration = document.getElementById("listDurationFilms");
+      listFindFilms = document.getElementById("listFindFilms");
+
+      var stars = ['Elijah Wood', 'Ian McKellen', 'Orlando Bloom','Ewan McGregor',' Liam Neeson', 'Natalie Portman', 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+      var movies = [
+            {
+              name: "Lord of the Rigs",
+              duration: 240,
+              starring: [ 'Elijah Wood', 'Ian McKellen', 'Orlando Bloom']
+            },
+            {
+              name: "Star Wars: Episode I - The Phantom Menace",
+              duration: 136,
+              starring: [ 'Ewan McGregor',' Liam Neeson', 'Natalie Portman']
+            },
+            {
+              name: "Fargo",
+              duration: 100,
+              starring: [ 'Ewan McGregor', 'Billy Bob Thornton', 'Martin Freeman']
+            },
+            {
+            name: "V for Vendetta",
+            duration: 150,
+            starring: [ 'Hugo Weaving', 'Natalie Portman', 'Rupert Graves']
+          }
+        ];
+//---------------------------------------       
+funcCreateStarSelector = (arr,nm,id) => {
+        let listSelect = document.createElement("select");
+        if(id) listSelect.id = id; 
+        let selOption = new Option(nm, 0, true, true);
+            selOption.disabled = true;
+            listSelect.appendChild(selOption);
+        arr.forEach((item,key) => {
+            selOption = new Option(item, key+1);
+            listSelect.appendChild(selOption);
+        });
+        return listSelect;
+
+      };
+
+ const listStarSelect = funcCreateStarSelector(stars,"Оберіть актора");
+       listStars.appendChild(listStarSelect);   
+//------------------------------------------------------------
+let listDurationSelect = document.createElement("select"); 
+funcCreateDurSelector = () => {
+
+       let selOption = new Option('Оберіть тривалість фільму', 0, true, true);
+            selOption.disabled = true;
+            listDurationSelect.appendChild(selOption)
+         movies.forEach((item,key) => {
+            listDurationSelect.id = movies[key].item; 
+            selOption = new Option(movies[key].duration, key+1);
+            listDurationSelect.appendChild(selOption);
+        });
+        return listDurationSelect;   
+      };    
+ listDuration.appendChild(listDurationSelect);  
+       funcCreateDurSelector();      
+//------------------------------------------
+viewArray(movies,'listFindFilms','Масив фільмів');
+//-------
+const findFilm = () =>{
+  let durationFilm = 0;
+  let nameStar = "";
+
+        
+        if (listDurationSelect.selectedIndex>0) {
+          durationFilm=listDurationSelect.options[listDurationSelect.selectedIndex].text;
+        };
+
+        if (listStarSelect.selectedIndex>0) {
+          nameStar = listStarSelect.options[listStarSelect.selectedIndex].text;
+        };
+     
+        const arrFindFilm = movies.filter(event => {
+            
+            if(nameStar) 
+             return (event.duration > durationFilm)&&(event.starring.some(strFind => {
+              return strFind === nameStar;
+            }));
+            else             
+            return event.duration >= durationFilm;
+        });
+    
+        listFindFilms.innerHTML = '';
+      
+        viewArray(arrFindFilm,'listFindFilms','Масив фільмів');
+      };
+//------------------------------------------
+listStars.addEventListener('change',findFilm);
+listDuration.addEventListener('change',findFilm);
+      });
+    </script>
+</head>
+<body>
+  <h1> №1</h1>  
+  <div>
+  <div id="listArray1"></div>
+  <div id="listArray2"></div>
+  <div id="listArray3">
+      <label for="idFind">Пошук :</label>
+      <input type="text" name="strFind" id="idFind">
+      <button id="btnFind">Знайти</button>
+      <div id="idFindArray"></div>
+   </div>
+  </div>
+  <h1> №2</h1>  
+  <div>
+  <div id="listArrayStars">
+  <div id="listDurationFilms"></div>
+</div>
+  <div id="listFindFilms"></div>
+
+  </div>  
+</body>
+</html>
