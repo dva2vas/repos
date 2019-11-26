@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Constructors</title>
+    <link href="task2.css" rel="stylesheet">
+    <script src="task2.js"></script>
+</head>
+<body>
+  <div id = "header">
+    <button id="btnAddMess" class="clBtnAdd">Створити тему</button>
+    <div class="clAddMsg"></div>  
+  </div>
+  <div class="wrap">
+    <header>
+    </header>
+    
+    <section>
+      <ul id="message_list">
+      </ul>
+
+    </section>
+
+  </div>
+
+
+  <script>
+  /*
+    Задание на классы.
+    Создать класс Message конструктор котрого состоит из следующих полей:
+    id, author, text, date, answers
+    У этого класса будет два метода:
+    SkipMessage() -> которое должно найти сообщение и удалить его из массива.
+    AnswerMessage()-> должно отрыть поле ввода, в который вы сможете ввести ответ
+    SendAnswer() -> метод который «отравляет» ответ, при этом обновляя поле ответа(answers) в вашем объекте с сообщением.
+    В метод SendAnswer нужно передать обьект класса Answer который наследуется от класса Message,
+    Но еще дополнительно будет иметь поле parentId.
+    message = {
+      id: '',
+      author: '',
+      text: '',
+      date: '',
+      answers: [
+        {
+          id: '',
+          author: '',
+          text: '',
+          date: '',
+          parentId: '',
+          answers: ''
+        }
+      ]
+    }
+    +Bonus: После создании сообщение добавляется в массив со всеми сообщениями, которые потом будут выводится на экран.
+    _ _ _
+    Задание можно разбелить на две части:
+      1. Создание самого сообщения:
+      id->выдаётся автоматом
+      Author-> селект с выбором автора
+      Text -> текст сообщения
+      date -> автоматически в момент создания
+      Все данные беруться с формы. Массив с сообщениями передается в функцию рендера, которая генерирует сам список.
+      2. Ответ на сообщение
+  */
+ 
+  </script>
+</body>
+
+</html>
