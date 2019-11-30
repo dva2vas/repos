@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Forms Task 1</title>
+  <script>
+    /*
+      Задание:
+        Сделать валидацию формы:
+        1. Логин / Пароль не может быть пустым
+        2. то поле, которое не прошло валидацию подсвечивать красным, которое прошло - подсвечивать зеленым.
+        3. Пока не стоит что юзер согласен с лиц. соглашением - кнопка отправки не активна
+    */
+    var fmLogin = document.getElementById('MyValidateForm');
+	var chkAgree = document.getElementById('agree');
+    window.addEventListener("load",()=>{
+      var form = document.getElementById("MyValidateForm");
+      var userName = document.querySelector("input[name='login']");
+      var pass1 = document.querySelector("input[name='pas1']");
+      var pass2 = document.querySelector("input[name='pas2']");
+      var chkBox = document.querySelector("input[type='checkbox']");
+      var strLogin = "";
+      var strPass1 = "";
+      var strPass2 = "";
+      checkData = () => {
+        var btnSubmit = document.getElementById("submit");
+        var check = true;
+        if(userName)
+          userName.className = 'OK';
+        else{
+          userName.className = 'error';
+          check = false;
+        };
+        if((strPass1)&&(strPass2) && (strPass1==strPass2)){
+          pass1.className = 'OK';        
+          pass2.className = 'OK';          
+        }else{
+          pass1.className = 'error';        
+          pass2.className = 'error'; 
+          check = false;
+        };
+        if((check)&&(chkBox.checked))
+             btnSubmit.removeAttribute("disabled");
+          else 
+             btnSubmit.setAttribute("disabled", "disabled");
+      };
+      
+      fnKeyUp = e => {
+        switch(e.target.getAttribute("name")){
+          case "login" : 
+		    userName = e.target.value.trim();  
+		    break;
+          case "pas1" : 
+		    strPass1 = e.target.value.trim();
+			break;
+          case "pas2" : 
+		    strPass2 = e.target.value.trim();
+			break;
+        };
+        checkData();
+      };
+      userName.addEventListener("keyup",fnKeyUp);
+      pass1.addEventListener("keyup",fnKeyUp);
+      pass2.addEventListener("keyup",fnKeyUp);
+      chkBox.addEventListener('click',checkData);
+      
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        console.log( 'log : ', userName );
+        console.log( 'pas1 : ', strPass1 );
+        console.log( 'pas2 : ', strPass2 );
+      });
+
+      checkData();
+    });	    
+  </script>
+</head>
+<body>
+  <form id="MyValidateForm">
+    <input type="text" name='login' placeholder="Ваш логин" />
+    <input type="password" name='pas1' placeholder="Ваш пароль" />
+    <input type="password" name='pas2' placeholder="Повторите пароль" />
+    <label for="agree">
+      <span>Вы согласны с лицензионым соглашением.</span>
+      <input type="checkbox" id="agree" />
+    </label>
+    <input type="submit" id="submit" value="Отправить" disabled/>
+  </form>
+
+  <style>
+    #MyValidateForm{
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #MyValidateForm input{
+      margin-bottom: 10px;
+      box-sizing: border-box;
+      padding: 10px 20px;
+    }
+    .error{
+        border: 1px solid red;
+    }
+    .OK{
+        border: 1px solid green;
+    }
+  </style>
+</body>
+</html>

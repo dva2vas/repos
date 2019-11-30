@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    1. При помощи fetch получить данные:
+     http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2
+    2. Полученый ответ преобразовать в json вызвав метод .json с объекта ответа
+    3. На основе данных посторить табличку
+
+    | index | company | email | phone | address |
+
+    4. создать кнопу которая скрывает показывает address
+     -->
+<div id = "tableJSON"></div>
+</body>
+<script>
+        window.addEventListener("load",() => {
+   
+           const сreateTable = async (link) => {
+             const div = document.getElementById("tableJSON");
+            // let vItem = {};
+             let counter = 1;
+             let strHTML = "";
+             let table  = document.createElement("table");
+             table.style.width = "100%";
+             table.setAttribute('border', '1');
+             strHTML+=`
+             <thead>
+               <tr>
+                 <th>index</th>
+                 <th>company</th>
+                 <th>email</th>
+                 <th>phone</th>
+                 <th>address</th>
+               </tr>
+             </thead>
+             `;
+             strHTML+="<TBODY>";
+             
+             let prom = await fetch(link);
+             let newJSON = await prom.json();
+             newJSON.forEach( item => {
+               let company = item.company;
+               let email = item.email;
+               let phone = item.phone;
+               let addres = item.address.country+" city:"+item.address.city+" street:"+item.address.street+" house:"+item.address.house;
+               strHTML+="<tr>";
+                         strHTML+="<td>"+counter+"</td>";
+               strHTML+="<td>"+company+"</td>";
+               strHTML+="<td>"+email+"</td>";
+               strHTML+="<td>"+phone+"</td>";
+              // strHTML+="<td><button>Показать дату</button><span hidden='true'>"+date+"</span></td>";
+               strHTML+="<td><button>Показать Адресс</button><span hidden='true'>"+addres+"</span></td>";
+               
+               strHTML+="</tr>";
+               counter++;
+             });
+           
+           
+             strHTML+="</TBODY>";
+             table.innerHTML=strHTML;
+             div.appendChild(table);
+             
+             const hiddenAttr = () => {
+                 document.querySelectorAll("span").forEach(item =>
+                 {
+                     item.setAttribute("hidden","true");  
+                 });
+             }
+             
+             div.querySelectorAll("button").forEach(event =>{
+               event.addEventListener("click",e => {
+                 hiddenAttr(); 
+                 e.target.parentNode.querySelector("span").removeAttribute("hidden");
+               });
+             });
+             console.log(newJSON);
+           };
+           
+           сreateTable("http://www.json-generator.com/api/json/get/cgwbLkTxnS?indent=2");
+           
+           });
+   </script>
+</html>

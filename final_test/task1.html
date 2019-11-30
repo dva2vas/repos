@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+            <input id="newToDo" class="textInput"/>
+            <input id="AddToDo" class="addButton" type="button" value="Add"/>
+    </header>
+    <ul id="toDoList"></ul>
+          
+    <style>
+        .done{
+            text-decoration: line-through;
+        }
+        .textInput{
+            box-sizing: border-box;
+            padding: 10px 20px;
+        }
+        .addButton{
+            box-sizing: border-box;
+            padding: 10px 20px;
+            background: #ffcc00;
+        }
+    
+        .DoneCheckbox,
+        .TodoText{
+            margin-right: 5px;
+        }
+    
+        button{
+            background: blue;
+            color: #fff;
+            padding: 5px 10px;
+        }
+    </style>
+<!--  
+      Задание:
+        Создать список дел, в который можно:
+        - Добавить новый элемент
+        - Удалить элемент
+
+      Шаблон элемента:
+        <li class="listItem">
+            <span class="TodoText">{add text}</span>
+            <button>Remove</button>
+        </li>
+-->
+<script>
+var ListCount = 0;
+      var list = document.getElementById("toDoList");
+      var btnAdd = document.getElementById("AddToDo");
+      var txtReceiver = document.getElementById("newToDo");
+	  
+      function statusBtnAdd(){
+            txtReceiver.setAttribute("placeholder","введите текст ...");
+        txtReceiver.value="";
+        txtReceiver.focus();
+      }
+	  
+      function btnDel(id){
+        id.target.parentNode.remove();
+        ListCount--;
+        statusBtnAdd();
+      };
+	  
+      function btnAddClick(){
+          var str=txtReceiver.value.trim();
+          if(str.length>0)
+              {
+              var li = document.createElement("li");   
+              li.innerHTML = "<button>"+"-"+"</button>  "+txtReceiver.value;  
+              li.setAttribute("style", "list-style: none;");
+              list.appendChild(li);  
+              li.querySelector("button").addEventListener("click",btnDel);
+              ListCount++;
+              }              
+        statusBtnAdd();
+      }
+      btnAdd.addEventListener("click",btnAddClick);
+ </script>   
+
+</body>
+</html>

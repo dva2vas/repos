@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+var objTrain = {};
+    objTrain.name ='Train', 
+	objTrain.speed =60,
+	objTrain.countPas = 100,
+	
+	objTrain.runing =function(){
+		   objTrain.speed=60;
+		  console.log(this.name+' везет '+this.countPas+' пасажиров со скоростью '+this.speed);
+	},
+    
+	objTrain.stoping =function(){
+		this.speed =0;
+		console.log(this.name+' остановился.'+' Скорость '+this.speed);
+	},	
+    objTrain.pass =function(x){
+		this.countPas=this.countPas+x;
+		console.log('В '+this.name+' садятся  '+this.countPas+' пасажиров.');
+	}	
+	
+	console.log(objTrain);
+	objTrain.runing();
+	objTrain.stoping();
+	objTrain.pass(123);
+	objTrain.runing();
+	objTrain.stoping();
+	objTrain.pass(13);
+    objTrain.runing();	   
+    </script>
+</body>
+</html>
