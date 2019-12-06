@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Теми</title>
+    <link rel="stylesheet" type="text/css" href="poster.css" media="all">
+</head>
+<body>
+
+<div class="mainBlock">
+    <div id="feed" class="block view">
+        <h1>Давайте обговоримо</h1>
+    </div>
+
+    <div class="block constructor" id="blockConstructor">
+        <h1>Конструктор тем</h1>
+        <form id="formConstructor">
+            <div>
+                <div class="col-25">
+                    <label for="author">Автор</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="author" required>
+                </div>
+            </div>
+            <div>
+                <div class="col-25">
+                    <label for="text">Текст посту</label>
+                </div>
+                <div class="col-75">
+                    <textarea id="text" required></textarea>
+                </div>
+            </div>
+            <div>
+                <div class="col-25"></div>
+                <div class="col-75">
+                    <img id="Img" src="" alt="">
+                </div>
+            </div>
+            <div>
+                <div class="col-25">
+                    <label for="urlImg">Фото</label>
+                </div>
+                <div class="col-75">
+                    <div class="col-75">
+                        <input type="text" id="urlImg" required>
+                    </div>
+                    <div class="col-25">
+                        <input type="button" id="btnImg" value="Дивись!">
+                    </div>
+                </div>
+            </div>
+            <input type="submit" id="sendPost" value="Створити">
+        </form>
+    </div>
+</div>
+
+<script src="poster.js"></script>
+<script src="poster_move_block.js"></script>
+
+</body>
+</html>

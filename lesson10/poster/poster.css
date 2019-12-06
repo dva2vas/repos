@@ -1,0 +1,201 @@
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #5f5d5d;
+    }
+    .mainBlock {
+        display: flex;
+        height: -webkit-fill-available;
+    }
+    .block {
+        background-color: white;
+        margin: 20px;
+        padding: 70px;
+    }
+    .view {
+        width: 60%;
+        overflow: auto;
+    }
+    .constructor {
+        width: 40%;
+    }
+    .col-25 {
+        float: left;
+        width: 25%;
+        margin-top: 6px;
+    }
+    .col-75 {
+        float: left;
+        width: 75%;
+        margin-top: 6px;
+    }
+    .sticky {
+        position: fixed;
+        top: 0px;
+        z-index: 100;
+      }    
+    h1 {
+        margin: 0;
+        font-size: 50px;
+    }
+    label {
+        font-size: 24px;
+        display: block;
+        transform: translateY(8px);
+    }
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        background-color: #c5c1c1;
+        border: none;
+        border-radius: 4px;
+    }
+    #textComment {
+        width: 100%;
+        height: 50px;
+        padding: 12px;
+        resize: none;
+        background-color: #c5c1c1;
+        border: none;
+        border-radius: 4px;
+        text-overflow: ellipsis;
+    }    
+    textarea {
+        width: -webkit-fill-available;
+        height: 50px;
+        padding: 12px;
+        resize: none;
+        background-color: #c5c1c1;
+        border: none;
+        border-radius: 4px;
+        text-overflow: ellipsis;
+    }
+    #Img {
+        width: 100%;
+    }
+    #urlImg {
+        width: 95%;
+    }
+    #btnImg {
+        font-weight: bold;
+    }
+    input[type=submit] {
+        margin-top: 10px;
+        font-size: 20px;
+        border: none;
+        background-color: #ffe536;
+    }
+    .post {
+        margin-top: 20px;
+    }
+    #formConstructor {
+        margin-top: 20px;
+    }
+    .postHead {
+        display: flex;
+    }
+    .postAuthor {
+        font-weight: bold;
+        color: #2e8fd3;
+    }
+    .postDate {
+        margin-left: auto;
+        color: silver;
+        font-style: italic;
+    }
+    .postImg {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .postText {
+        font-size: 18px;
+        text-align: justify;
+    }
+    .postBtn {
+        margin-top: 20px;
+        display: flex;
+    }
+    .postLike {
+    }
+    .postCountCom {
+        color: silver;
+        font-size: 18px;
+        margin-left: auto;
+        transform: translateY(14px) translateX(-5px);
+    }
+    .postWriteCom {
+    }
+    .heart {
+        margin-right: 10px;
+        width: 25px;
+        transform: translateY(5px);
+        fill: #0c78cd;
+    }
+    .likeBtn {
+        height: 44px;
+        background: rgba(46, 143, 211, 0.21);
+        color: #0c78cd;
+    }
+    .likeBtn.active {
+        background: rgba(46, 143, 211, 0.78);
+        color: #0c4478;
+    }
+    .heart.active {
+        fill: #0c4478;
+    }
+    .writeBtn {
+        height: 44px;
+        background: rgba(255, 176, 25, 0.2);
+    }
+    button {
+        border: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        font-size: 20px;
+        border-radius: 4px;
+    }
+    .likeText {
+        transform: translateY(-5px);
+        display: block;
+    }
+    .postComment {
+        margin-top: 20px;
+    }
+    .hideComment {
+        display: none;
+    }
+    .comment {
+        margin-bottom: 20px;
+        margin-left: 40px;
+    }
+    .commentLine {
+        background-color: #5f5d5d;
+        transform: translateX(-40px);
+        text-overflow: ellipsis;
+    }
+    .commentBlock {
+        background-color: white;
+        transform: translateX(5px);
+        padding-left: 45px;
+        padding-bottom: 10px;
+    }
+    .commentHead {
+        display: flex;
+        margin-bottom: 10px;
+    }
+    .commentAuthor {
+        font-weight: bold;
+        color: #2e8fd3;
+    }
+    .commentDate {
+        margin-left: auto;
+        color: silver;
+        font-style: italic;
+    }
+    .commentText {
+        font-size: 18px;
+        text-align: justify;
+    }
